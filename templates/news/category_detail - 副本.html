@@ -1,0 +1,205 @@
+{% load staticfiles %}
+{% load news_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'news/css/reset.css' %}" type="text/css" media="all">
+  <link rel="stylesheet" href="{% static 'news/css/grid.css' %}" type="text/css" media="all">
+  <link rel="stylesheet" href="{% static 'news/css/style.css' %}" type="text/css" media="all">
+  <!--[if lt IE 9]>
+  	<script type="text/javascript" src="{% static 'news/js/html5.js' %}"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <header>
+    <nav>
+    	<div class="container">
+        <div class="wrapper">
+          <h1><a href="#"><strong>新闻</strong>系统</a></h1>
+          <ul> 
+          	<li><a href="{% url 'news:index' %}">新闻</a></li>
+            <li><a href="#">军事</a></li>
+            <li><a href="template2.html">滚动</a></li>
+            <li><a href="#">登陆</a></li>
+          </ul>
+        </div>
+      </div>python
+    </nav>
+    <section class="adv-content">
+    	<div class="container">
+        <ul class="breadcrumbs">
+        	        	<li style="font-size:24px;">新闻分类</li>
+        </ul>
+        <form action="" id="search-form">
+          <fieldset>
+          	<input type="text" value=""><input type="submit" value="">
+          </fieldset>
+        </form>
+      </div>
+    </section>
+  </header>
+  <section id="content">
+  	<div class="top">
+    	<div class="container">
+      	<div class="clearfix">
+        	<div class="grid3 first">
+          	<h2>NEWS LISTS</h2>
+
+
+                {% for post in  post_list %}
+                    <article class="post post-{{ post.pk }}">
+                    <ul class="list3">
+                        <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                        <li></li>
+
+                    </ul>
+                    <article/>
+                {% empty %}
+                    该分类下暂无文章
+                {% endfor %}
+            <a href="#" class="more">Read More</a>
+            </div>
+       	  <div class="grid9">
+          	<h2>新闻导读</h2>
+            <div class="img-box">
+           	  <figure><img src="{% static 'news/images/2page-img1.jpg' %}" alt=""></figure>
+              <p>&nbsp;</p>
+              <p style="font-size:18px;"><a href="#"><strong>Fusce euismod consequat ante</strong></a> lorem ipsum dolor sit amet consectetuer adipiscing elit pellentesque sed dolor. Aliquam congue fermentum nisl mauris accumsan nulla veldiam sed lacus utenim adipiscing aliquet nulla.</p>
+              <p style="font-size:18px;">Venenatis inpede maliquet amet euismod nauctor ligula aliquam dapibus tincidunt metus <a href="#">praesent justo dolor lobortis</a> quis lobortisissim pulvinar aclorem vestibulum sed ante. Donec sagittis euismod purus lorem ipsum dolor.
+            </p>
+            </div>
+            <div class="img-box">
+            	<figure><img src="{% static 'news/images/2page-img2.jpg' %}" alt=""></figure>
+              <p>&nbsp;</p>
+              <p style="font-size:18px;"><a href="#"><strong>Lorem ipsum dolor sit amet consectetuer</strong></a> adipiscing elit pellentesque sed dolor. Aliquam congue fermentum nisl mauris accumsan nulla veldiam sedlacus utenim adipiscing aliquet venenatis inpede maliquet amet euismod.</p>
+              <p style="font-size:18px;">Nauctor ligul aliquam dapibus tincidunt metus praesent justo dolor lobortis lobort- sissim pulvinar aclorem vestibulum <a href="#">sed ante donec sagittis euismod</a> purus lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie            </p>
+            </div>
+            <p><a href="#" class="more">Read More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="middle">
+    	<div class="container">
+      	<div class="clearfix">
+        	<div class="grid3 first">
+          	<h2>热点摘要</h2>
+            <div class="img-wrap"><figure><img src="{% static 'news/images/2page-img3.jpg' %}" alt=""></figure></div>
+            <p style="font-size:18px;">Fuscem euismod consequat ante lorem ipsum dolor sitamet consectetuer adipiscing elit pellentesque sed.</p>
+            <p style="font-size:18px;"><a href="#">Aliquam congue fermentum nisl. Mauris accumsan nulla vel diam sed in lacus ut enim adipiscing aliquet nulla</a></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <a href="#" class="more">Read More</a>
+          </div>
+        	<div class="grid9">
+          	<h2>新闻导读</h2>
+            <p style="font-size:18px;"><a href="#"><strong>Fusce euismod consequat ante lorem</strong></a> ipsum dolor sit amet consectetuer adipiscing elit pellentes dolor aliquam conguet fermentum nisl. Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede maliquet sit amet, euismod in, auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortisissim pulvinar ac, lorem. Vestibulum sed ante. Donec sagittis euismod purus.Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p> 
+            <p style="font-size:18px;">Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris phasellus porta fusce suscipit varius micum sociis natoque penatibus et magnis dis parturient nascetur ridiculus musnulla dui fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna.</p>
+            <div class="clearfix">
+            	<div class="grid3 first">
+              	<ul class="list3">
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                </ul>
+              </div>
+            	<div class="grid3">
+              	<ul class="list3">
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                </ul>
+              </div>
+            	<div class="grid3">
+              	<ul class="list3">
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                  <li></li>
+                  <li><a href="index-4.html">新闻</a></li>
+                     </ul>
+              </div>
+            </div>
+            <p>&nbsp;</p>
+            <p style="font-size:20px"><a href="#" class="more" >Read More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+    	<div class="container">
+      	<div class="clearfix">
+        	<div class="grid6 first">
+             <h3>Services List</h3>
+            <div class="wrapper">
+            	<div class="grid3 first">
+              	<ul class="list2">
+                	<li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                 <li><a href="#">**</a></li>
+                 <li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                </ul>
+              </div>
+            	<div class="grid3">
+              	<ul class="list2">
+                	<li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                 <li><a href="#">**</a></li>
+                 <li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                  <li><a href="#">**</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="grid3">
+            <h3>Unique Services</h3>
+            <p>Praesent vestibulum mol lacus aenean nonummy hendrerit maurisen phasellus porta fusce suscipit varius micum sociis natoque penatibus et magnis.</p>
+            Diparturient nascetur ridiculus musnulla dui fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus.
+          </div>
+          <div class="grid3">
+            <h3>Risk Management</h3>
+            <p>Praesent vestibulum mol lacus aenean nonummy hendrerit maurisen phasellus porta fusce suscipit variusem.</p>
+            <ul class="list1">
+              <li><a href="#">**</a></li>
+              <li><a href="#">**</a></li>
+              <li><a href="#">**</a></li>
+            </ul>
+          </div>
+          <div class="grid3">
+          	<div id="datepicker"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+    	<div class="wrapper">
+      	<div class="copy">Industrial Services (c) 2010  |  <a href="index-4.html">Privacy policy</a></div>
+        <address class="phone">
+        	We're glad to help you. Please email or call us. <strong>1-123-456-7890</strong>
+        </address>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block main %}
+<section id="content">
+    <article class="post post-1">
+  	<div class="top">
+    	<div class="container">
+      	<h2>{{ post.title }}</h2>
+            <p>发布时间：{{ post.created_time }}</p>
+        <p>{{ post.body|safe }}</p>
+
+
+      </div>
+    </div>
+    </article>
+  </section>
+
+{% endblock %}

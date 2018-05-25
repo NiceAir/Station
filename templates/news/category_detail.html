@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load news_tags %}
+{% block main %}
+  <section id="content">
+  	<div class="top">
+    	<div class="container">
+            <div class="clearfix">
+                <div class="grid3 first">
+                    <h2>NEWS LISTS</h2>
+                        {% if error_msg %}
+                            <p>{{ error_msg }}</p>
+                        {% endif %}
+
+                    {% for post in  post_list %}
+                        <article class="post post-{{ post.pk }}">
+                        <ul class="list3">
+                            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+{#                            <li><a href="#">{{ post.title }}</a></li>#}
+                            <li></li>
+
+                        </ul>
+                        </article>
+                    {% empty %}
+                        该分类下暂无文章<br>
+                    {% endfor %}
+                     <a href="#" class="more">更多文章</a>
+                </div>
+
+                  <div class="grid9">
+                      <h2>新闻导读</h2>
+                      {% for post in post_list %}
+                          {% if forloop.first %}
+
+                            <div class="img-box">
+                              <figure><img src="{{ post.img }}" alt=""></figure>
+                              <p>&nbsp;</p>
+                              <p style="font-size:18px;">{{ post.title }}</p>
+                            </div>
+                            <p><a href="{{ post.get_absolute_url }}" class="more">阅读详情</a></p>
+
+                          {% endif %}
+                        {% empty %}
+                      {% endfor %}
+
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="middle">
+    	<div class="container">
+      	<div class="clearfix">
+
+            {% get_popular_post as popular_post_list %}
+         	<div class="grid3 first">
+                <h2>热点摘要</h2>
+                {% for post in popular_post_list %}
+                    {% if forloop.first %}
+                        <div class="img-wrap"><figure><img src="{% static 'news/images/2page-img3.jpg' %}" alt=""></figure></div>
+                        <p style="font-size:18px;">{{ post.excerpt }}</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <a href="{{ post.get_absolute_url }}" class="more">阅读详情</a>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        	<div class="grid9">
+                <h2>热门新闻</h2>
+                <div class="clearfix">
+                    <div class="grid3">
+                        <ul class="list3">
+                            {% for post in popular_post_list %}
+                            {% if forloop.counter <= 3 %}
+                                <li></li>
+                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="grid3">
+                        <ul class="list3">
+                            {% for post in popular_post_list %}
+                            {% if forloop.counter > 3 and forloop.counter < 7 %}
+                                <li></li>
+                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <div class="grid3">
+                        <ul class="list3">
+                           {% for post in popular_post_list %}
+                            {% if forloop.counter > 6 and forloop.counter < 10 %}
+                                <li></li>
+                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+                <p>&nbsp;</p>
+                <p style="font-size:20px"><a href="#" class="more" >更多文章</a></p>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

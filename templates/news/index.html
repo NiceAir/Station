@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load news_tags %}
+{% block main %}
+
+    <section id="content">
+  	<div class="top">
+    	<div class="container">
+            <div class="clearfix">
+                <section id="gallery">
+                    <div class="pics">
+                        <img src="{% static 'news/images/slide1.jpg' %}" alt="" width="495" height="329">
+                        <img src="{% static 'news/images/slide3.jpg' %}" alt="" width="495" height="329">
+                        <img src="{% static 'news/images/slide2.jpg' %}" alt="" width="495" height="329">
+                        <img src="{% static 'news/images/slide4.jpg' %}" alt="" width="495" height="329">
+                        <img src="{% static 'news/images/slide5.jpg' %}" alt="" width="495" height="329">
+
+                    </div>
+                    <a href="#" id="prev"></a>
+                    <a href="#" id="next"></a>
+                </section>
+                <section id="intro">
+          	        <div class="inner">
+          	            <h2>看世界</h2>
+          	            <h2><span>今日热点</span></h2>
+                        <p>习近平和母亲<br />
+                            在习近平总书记的书架上，摆着这样一张照片。记录下了习近平陪伴母亲散步的温馨时刻，习近平拉着母亲齐心的手，漫步在公园中。
+                            孝敬父母、重视亲情，习近平有着深厚的家庭情怀。</p>
+                        <a href="#" class="extra-button">阅读详情</a>
+          	        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="middle">
+
+    	<div class="container">
+      	    <div class="wrapper">
+                <div class="grid3 first">
+
+                <ul class="categories">
+                    {% get_categories as category_list %}
+                    <li><a href="#">导航</a></li>
+
+                        {% for category in category_list %}
+                            <li><a href="{% url 'news:category' category.pk %}">{{ category.name }}</a></li>
+                        {% empty %}
+                            sorry,暂无分类
+                        {% endfor %}
+
+                </ul>
+                </div>
+                <div class="grid9">
+                    {% get_recent_posts as post_list %}
+                    {% for post in post_list %}
+                        {% if forloop.first %}
+                         <h2>{{ post.title }}</h2>
+                        <p>{{ post.excerpt }}</p>
+                        <p><a href="{{ post.get_absolute_url }}" class="more">阅读详情</a></p>
+                        <section class="images">
+                            <figure><a href="#"><img src="{% static 'news/images/1page-img1.jpg' %}" alt=""></a></figure>
+                          <figure><a href="#"><img src="{% static 'news/images/1page-img2.jpg' %}" alt=""></a></figure>
+                          <figure><a href="#"><img src="{% static 'news/images/1page-img3.jpg' %}" alt=""></a></figure>
+
+                        </section>
+                        {% endif %}
+                    {% empty %}
+                        sorry,该类下没有文章
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+
+{% endblock main %}
