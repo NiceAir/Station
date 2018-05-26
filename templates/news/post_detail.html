@@ -4,14 +4,58 @@
     <article class="post post-1">
   	<div class="top">
     	<div class="container">
-      	<h2>{{ post.title }}</h2>
+      	    <h2>{{ post.title }}</h2>
             <p>发布时间：{{ post.created_time }}</p>
-        <p>{{ post.body|safe }}</p>
+            <p>{{ post.body|safe }}</p>
+
+            <form action="{% url 'comments:post_comment' post.pk %}" method="post" class="comment-form">
+                {% csrf_token %}
+                <div class="">
+                    <div class="">
+                        <label for="{{ form.name.id_for_label }}">名字：</label>
+                        {{ form.name }}
+                        {{ form.name.errors }}
 
 
-      </div>
+                        <label for="{{ form.email.id_for_label }}">邮箱：</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+
+                        <label for="{{ form.url.id_for_label }}">URL：</label>
+                        {{ form.url }}
+                        {{ form.url.errors }}
+                    </div>
+                    <div class="">
+                        <label for="{{ form.text.id_for_label }}" >评论：</label>
+                        {{ form.text }}
+                        {{ form.text.errors }}
+                        <br>
+                      <button type="submit">发表</button>
+
+                    </div>
+                </div>    <!-- row -->
+            </form>
+
+            <div>
+                <ul class="comment-list list-unstyled">
+                    <h3>评论列表，共 <span>{{ post.comment_set.count }}</span> 条评论</h3>
+                    {% for comment in comment_list %}
+                        <li class="comment-item">
+                            <span class="nickname">{{ comment.name }}</span>
+                            <time class="submit-date">{{ comment.created_time }}</time>
+                            <div class="text">
+                                {{ comment.text }}
+                            </div>
+                        </li>
+                    {% empty %}
+                        暂无评论
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
     </div>
     </article>
-  </section>
+</section>
 
 {% endblock %}

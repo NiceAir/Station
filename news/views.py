@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 import markdown
 # Create your views here.
-
+from comments.forms import CommentForm
 from django.http import HttpResponse
 from .models import Post, Category, Tag, Illustration
 from django.views.generic import ListView, DetailView
@@ -125,29 +125,21 @@ class PostDetailView(DetailView):
         post.toc = md.toc
         return post
 
-    # def get_context_data(self, **kwargs):
-    #    # 覆盖get_context_data 的目的是为了除了将post传递给模板外（DateilView已经帮我们完成）
-    #     # 还要把评论表单、post下评论的列表传递给模板
-    #     context = super(PostDetailView, self).get_context_data(**kwargs)
-    #     form = CommentForm()
-    #     comment_list = self.object.comment_set.all()
-    #     context.update(
-    #         {
-    #             'form': form,
-    #             'comment_list': comment_list
-    #         }
-    #         )
-    #     return context
+    def get_context_data(self, **kwargs):
+       # 覆盖get_context_data 的目的是为了除了将post传递给模板外（DateilView已经帮我们完成）
+        # 还要把评论表单、post下评论的列表传递给模板
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        form = CommentForm()
+        comment_list = self.object.comment_set.all()
+        context.update(
+            {
+                'form': form,
+                'comment_list': comment_list
+            }
+            )
+        return context
 
 
-# class CategoryView(ListView):
-#     model = Post
-#     template_name = 'news/index.html'
-#     context_object_name = 'post_list'
-#
-#     def get_queryset(self):
-#         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
-#         return super(CategoryView, self).get_queryset().filter(category=cate)
 
 def category(request, pk):
     # 记得在开始部分导入 Category 类
