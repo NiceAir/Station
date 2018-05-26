@@ -3,18 +3,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title></title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="{% static 'news/css/reset.css' %}" type="text/css" media="all">
-  <link rel="stylesheet" href="{% static 'news/css/grid.css' %}" type="text/css" media="all">
-  <link rel="stylesheet" href="{% static 'news/css/style.css' %}" type="text/css" media="all">
-  <link rel="stylesheet" href="{% static 'news/css/jquery-ui-1.8.5.custom.css' %}" type="text/css" media="all">
-  <script type="text/javascript" src="{% static 'news/js/jquery-1.4.2.min.js' %}" ></script>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'news/css/reset.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'news/css/grid.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'news/css/style.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'news/css/jquery-ui-1.8.5.custom.css' %}" type="text/css" media="all">
+    <script type="text/javascript" src="{% static 'news/js/jquery-1.4.2.min.js' %}" ></script>
 	<script type="text/javascript" src="{% static 'news/js/jquery.cycle.all.js' %}"></script>
-  <script type="text/javascript" src="{% static 'news/js/jquery-ui-1.8.5.custom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'news/js/jquery-ui-1.8.5.custom.min.js' %}"></script>
   <!--[if lt IE 9]>
-  	<script type="text/javascript" src="{% static 'news/js/html5.js' %}"></script>
+    <script type="text/javascript" src="{% static 'news/js/html5.js' %}"></script>
   <![endif]-->
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,16 +39,15 @@
     </nav>
     <section class="adv-content">
     	<div class="container">
-        <ul class="breadcrumbs">
-        	<li>搜索</li>
+            <form action="{% url 'haystack_search' %}" id="search-form" role="search" method="get">
+                <fieldset>
 
-        </ul>
-        <form action="" id="search-form">
-          <fieldset>
-          	<input type="text" value="输入关键字"><input type="submit" value="">
-          </fieldset>
-        </form>
-      </div>
+                    <input type="text" name="q"   placeholder="搜索" required>
+                    <input type="submit" value="">
+
+                </fieldset>
+            </form>
+        </div>
     </section>
   </header>
 

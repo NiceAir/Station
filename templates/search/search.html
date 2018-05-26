@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load highlight %}
+{% block main %}
+
+<section id="content">
+    {% if query %}
+        {% for result in page.object_list %}
+
+            <article class="post post-1">
+
+                <div class="top">
+                    <div class="container">
+                    <h2><span>
+                    <a href="{{ result.object.get_absolute_url }}"> {% highlight result.object.title with query %}</a>
+                    </span>
+                    </h2>
+                     <span>
+                         <a href="{% url 'news:category' result.object.category.pk %}">
+                                {{ result.object.category.name }}
+                     </a>
+                     </span>
+
+                    <span>
+                        <a href="#">
+                        <time class="entry-date" datetime="{{ result.object.created_time }}">
+                                    {{ result.object.created_time }}
+                        </time>
+                    </a>
+                    </span>
+                    <br>
+                    {% highlight result.object.body with query %}
+
+                    <a href="{{ result.object.get_absolute_url }}" class="more">继续阅读</a>
+
+                    <br>
+                    <br><br><br>
+                </div>
+                </div>
+            </article>
+
+        {% empty %}
+            <h2>没有搜索到你想要的结果！</h2>
+        {% endfor %}
+
+
+        {% if page.has_previous or page.has_next %}
+
+            <div>
+                {% if page.has_previous %}
+                    <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 前一页
+                {% if page.has_previous %}</a>{% endif %}
+                |
+                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %} 后一页
+                &raquo;{% if page.has_next %}</a>{% endif %}
+            </div>
+
+        {% endif %}
+
+
+    {% else %}
+        请输入搜索关键词
+    {% endif %}
+
+</section>
+
+{% endblock %}
