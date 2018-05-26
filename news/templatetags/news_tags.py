@@ -30,3 +30,8 @@ def get_tag_cloud():
 def get_popular_post(num=9):
     return Post.objects.all().order_by('-views')[:num]
 
+@register.simple_tag()
+def get_more_popular_post():
+    return Post.objects.all().order_by('-views')
+
+

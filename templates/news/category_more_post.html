@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<section id="content">
+    <div class="top">
+    	<div class="container">
+            <h3><a href="{% url 'news:index' %}" class="current">首页</a>
+                >
+                <a href="{% url 'news:category' whatcategory.pk %}">{{ whatcategory.name }}</a>
+            </h3>
+    {% for post in post_list %}
+
+
+        <article class="post post-{{ post.object.pk }}">
+            <div>
+                <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <p>发布时间：{{ post.created_time }} &nbsp;&nbsp;&nbsp;阅读量：{{ post.views }}</p>
+                <p>{{ post.excerpt }}</p>
+            </div>
+        </article>
+
+    {% empty %}
+        <p>{{ whatcategory.name }} 分类下暂时没有文章</p>
+    {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

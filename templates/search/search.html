@@ -3,13 +3,15 @@
 {% block main %}
 
 <section id="content">
-    {% if query %}
-        {% for result in page.object_list %}
+    <article class="post post-1">
+        <div class="top">
+            <div class="container">
 
-            <article class="post post-1">
+            <h3><a href="{% url 'news:index' %}" class="current">首页</a>> 搜索</h3>
 
-                <div class="top">
-                    <div class="container">
+            {% if query %}
+                {% for result in page.object_list %}
+
                     <h2><span>
                     <a href="{{ result.object.get_absolute_url }}"> {% highlight result.object.title with query %}</a>
                     </span>
@@ -34,33 +36,33 @@
 
                     <br>
                     <br><br><br>
-                </div>
-                </div>
-            </article>
 
-        {% empty %}
-            <h2>没有搜索到你想要的结果！</h2>
-        {% endfor %}
+                {% empty %}
+                    <h2>没有搜索到你想要的结果！</h2>
+                {% endfor %}
 
 
-        {% if page.has_previous or page.has_next %}
+                {% if page.has_previous or page.has_next %}
 
-            <div>
-                {% if page.has_previous %}
-                    <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 前一页
-                {% if page.has_previous %}</a>{% endif %}
-                |
-                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %} 后一页
-                &raquo;{% if page.has_next %}</a>{% endif %}
+                    <div>
+                        {% if page.has_previous %}
+                            <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 前一页
+                        {% if page.has_previous %}</a>{% endif %}
+                        |
+                        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %} 后一页
+                        &raquo;{% if page.has_next %}</a>{% endif %}
+                    </div>
+
+                {% endif %}
+
+
+            {% else %}
+                请输入搜索关键词
+            {% endif %}
+
             </div>
-
-        {% endif %}
-
-
-    {% else %}
-        请输入搜索关键词
-    {% endif %}
-
+        </div>
+    </article>
 </section>
 
 {% endblock %}

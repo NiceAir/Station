@@ -33,7 +33,7 @@ class Tag(models.Model):
 
 #文章的封面插图
 class Illustration(models.Model):
-    Img = models.CharField(max_length=100)
+    Img = models.CharField(max_length=200)
 
     def _str_(self):
         return self.Img

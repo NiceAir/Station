@@ -7,24 +7,30 @@
     	<div class="container">
             <div class="clearfix">
                 <div class="grid3 first">
-                    <h2>NEWS LISTS</h2>
+                    <h2>新闻列表</h2>
+                        <h3><a href="{% url 'news:index' %}" class="current">首页</a>> {{ whatcategory.name }}</h3>
                         {% if error_msg %}
                             <p>{{ error_msg }}</p>
                         {% endif %}
 
                     {% for post in  post_list %}
                         <article class="post post-{{ post.pk }}">
-                        <ul class="list3">
-                            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-{#                            <li><a href="#">{{ post.title }}</a></li>#}
-                            <li></li>
+                        {% if forloop.counter <= 5  %}
+                            <div>
+                                <ul class="list3">
+                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                                    {{ post.created_time }}
+                                <li></li>
 
-                        </ul>
+                                </ul>
+                            </div>
+                        {% endif %}
                         </article>
                     {% empty %}
                         该分类下暂无文章<br>
                     {% endfor %}
-                     <a href="#" class="more">更多文章</a>
+                    <a href="{% url 'news:category_more_post' whatcategory.pk %}" class="more">更多文章</a>
+{#                     <a href="#" class="more">更多文章</a>#}
                 </div>
 
                   <div class="grid9">
@@ -33,9 +39,12 @@
                           {% if forloop.first %}
 
                             <div class="img-box">
-                              <figure><img src="{{ post.img }}" alt=""></figure>
+                              <figure><img src="{{ post.img.Img }}" width=400px height=450px></figure>
                               <p>&nbsp;</p>
-                              <p style="font-size:18px;">{{ post.title }}</p>
+                                {{ post.img.Img }}
+                              <p style="font-size:22px;">{{ post.title }}</p>
+                                <p>{{ post.created_time }} &nbsp;&nbsp;{{ post.views }}&nbsp;&nbsp;&nbsp;{{ post.author }}</p>
+                                <p>{{ post.excerpt }}</p>
                             </div>
                             <p><a href="{{ post.get_absolute_url }}" class="more">阅读详情</a></p>
 
@@ -57,6 +66,7 @@
                 {% for post in popular_post_list %}
                     {% if forloop.first %}
                         <div class="img-wrap"><figure><img src="{% static 'news/images/2page-img3.jpg' %}" alt=""></figure></div>
+                        <p>{{ post.views }}</p>
                         <p style="font-size:18px;">{{ post.excerpt }}</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
@@ -103,9 +113,10 @@
 
                 </div>
                 <p>&nbsp;</p>
-                <p style="font-size:20px"><a href="#" class="more" >更多文章</a></p>
-            </div>
 
+{#                <p style="font-size:20px"><a href="#" class="more" >更多热门新闻</a></p>#}
+            <p style="font-size:20px"><a href="{% url 'news:hot_topic' %}" class="more" >更多热门新闻</a></p>
+            </div>
 
         </div>
       </div>

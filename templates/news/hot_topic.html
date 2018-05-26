@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block main %}
+
+{% load news_tags %}
+
+<section id="content">
+    <div class="top">
+    	<div class="container">
+        <h3><a href="{% url 'news:index' %}" class="current">首页</a>> 热点新闻</h3>
+        {% get_more_popular_post as post_list %}
+            {% for post in post_list %}
+                <div>
+                    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                    <p>发布时间：{{ post.created_time }} &nbsp;&nbsp;&nbsp;阅读量：{{ post.views }}</p>
+                    <p>{{ post.excerpt }}</p>
+                </div>
+            {% empty %}
+                对不起，暂时没有文章
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% if query %}
+
+        {% if page.has_previous or page.has_next %}
+
+            <div>
+                {% if page.has_previous %}
+                    <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 前一页
+                {% if page.has_previous %}</a>{% endif %}
+                |
+                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %} 后一页
+                &raquo;{% if page.has_next %}</a>{% endif %}
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+</section>
+
+
+{% endblock %}

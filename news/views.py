@@ -140,11 +140,20 @@ class PostDetailView(DetailView):
         return context
 
 
-
 def category(request, pk):
     # 记得在开始部分导入 Category 类
     cate = get_object_or_404(Category, pk=pk)
     post_list = Post.objects.filter(category=cate).order_by('-created_time')
-    return render(request, 'news/category_detail.html', context={'post_list': post_list})
+
+    return render(request, 'news/category_detail.html', context={'post_list': post_list, 'whatcategory':cate, })
+
+def category_more_post(request, pk):
+    # 记得在开始部分导入 Category 类
+    cate = get_object_or_404(Category, pk=pk)
+    post_list = Post.objects.filter(category=cate).order_by('-created_time')
+
+    return render(request, 'news/category_more_post.html', context={'post_list': post_list, 'whatcategory':cate, })
 
 
+def hot_topic(request):
+    return render(request, 'news/hot_topic.html', )
