@@ -22,11 +22,20 @@
                 <section id="intro">
           	        <div class="inner">
           	            <h2>看世界</h2>
-          	            <h2><span>今日热点</span></h2>
-                        <p>习近平和母亲<br />
-                            在习近平总书记的书架上，摆着这样一张照片。记录下了习近平陪伴母亲散步的温馨时刻，习近平拉着母亲齐心的手，漫步在公园中。
-                            孝敬父母、重视亲情，习近平有着深厚的家庭情怀。</p>
-                        <a href="#" class="extra-button">阅读详情</a>
+          	            <h2><span>本月热点</span></h2>
+                        {% get_now_day_hot as post_list %}
+                        {% for post in post_list %}
+
+                            {% if forloop.first %}
+                                <p>{{ post.title }}<br />
+                                {{ post.excerpt }}</p>
+                            <a href="{{ post.get_absolute_url }}" class="extra-button">阅读详情</a>
+                            {% endif %}
+                        {% empty %}
+                            本月暂未发布新闻
+                        {% endfor %}
+
+
           	        </div>
                 </section>
             </div>

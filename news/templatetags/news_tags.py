@@ -5,6 +5,8 @@
 from django.db.models.aggregates import Count
 from ..models import Post, Category, Tag
 from django import template
+from django.utils import timezone
+from datetime import datetime, date
 
 register = template.Library()
 
@@ -34,4 +36,13 @@ def get_popular_post(num=9):
 def get_more_popular_post():
     return Post.objects.all().order_by('-views')
 
+@register.simple_tag()
+def get_now_day_hot():
+    t = timezone.now()
 
+    # ,
+    # created_time__month = t.month,
+    # created_time__day = t.day
+    return Post.objects.filter(created_time__year=t.year,
+                               created_time__month=t.month,
+                               ).order_by('-views')
